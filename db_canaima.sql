@@ -5,8 +5,8 @@ SET search_path = public, pg_catalog;
 SET default_tablespace = '';
 SET default_with_oids = false;
 CREATE TABLE tab_canaima_c (
-    serial_c character varying(18) NOT NULL,
-    modelo_c character varying(4),
+    serial_c character varying(25) NOT NULL,
+    modelo_c character varying(20),
 	institucion_c text,
     ci_n integer NOT NULL
 );
@@ -33,7 +33,7 @@ CREATE TABLE tab_reparacion_re (
 CREATE TABLE tab_representante_r (
     ci_r integer NOT NULL,
     nombre_r text NOT NULL,
-    tlf_r character varying(11)
+    tlf_r character varying(12)
 );
 CREATE TABLE tab_canaima_representante_cr (
     id_cr character varying(30) NOT NULL,
