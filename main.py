@@ -129,7 +129,13 @@ class Formulario:
 		#tlf_r. Número de teléfono del representante
 		self.label9 = Label(self.labelframe_form0, text = "Teléfono")
 		self.label9.grid(row = 9, column = 0)
-		self.tlf_r_entry8 = Entry(self.labelframe_form0)
+		#función para convertir las letras minúsculas en mayúsculas
+		tlf_r = StringVar()
+		def tlf_r_mayuscula(self):
+			tlf_r.set(tlf_r.get().upper())
+
+		self.tlf_r_entry8 = Entry(self.labelframe_form0, textvariable = tlf_r)
+		self.tlf_r_entry8.bind("<KeyRelease>", tlf_r_mayuscula)
 		self.tlf_r_entry8.grid(row = 9, column = 1)
 
 		################################################## fin tab_representante_r ##################################################
@@ -1022,8 +1028,8 @@ class Formulario:
 
 		self.capturar()
 
-		if ci_n.isdigit() != True or ci_r.isdigit() != True or tlf_r.isdigit() != True:
-			tkMessageBox.showinfo("sistema-canaima", "Debe ingresar sólo números:\n*Cédula del alumno\n*Cédula del representante\n*Número telefónico")
+		if ci_n.isdigit() != True or ci_r.isdigit() != True:
+			tkMessageBox.showinfo("sistema-canaima", "Debe ingresar sólo números:\n*Cédula del alumno\n*Cédula del representante")
 			return False
 		else:
 			return True
@@ -1074,22 +1080,22 @@ class Formulario:
 
 		self.capturar()
 
-		if len(tlf_r) != 11:
-			tkMessageBox.showinfo("sistema-canaima", "El número de teléfono debe contener 11 caracteres")
-			return False
-		else:
+		if (len(tlf_r) == 11 and tlf_r.isdigit() == True) or tlf_r == "SIN TELEFONO":
 			return True
+		else:
+			tkMessageBox.showinfo("sistema-canaima", "El número de teléfono debe contener 11 caracteres numéricos.\nO en su defecto: SIN TELEFONO")
+			return False
 
-	#validar_serial_c
-	def validar_serial_c(self):
+	#validar_serial_modelo
+	def validar_serial_modelo(self):
 
 		self.capturar()
 
-		if serial_c.isalnum() == False:
-			tkMessageBox.showinfo("sistema-canaima", "El serial del equipo debe contener sólo caracteres alfanuméricos")
-			return False
-		else:
+		if serial_c.isalnum() == True and len(serial_c) <= 25 and len(modelo_c) <= 20:
 			return True
+		else:
+			tkMessageBox.showinfo("sistema-canaima", "El serial y el modelo del equipo debe contener no más de 25 caracteres alfanuméricos")
+			return False
 
 	#validar_fec_re_re. Formato de fecha: 2006-06-06, año-mes-día
 	def validar_fec_re_re(self):
@@ -1125,7 +1131,7 @@ class Formulario:
 
 	def validar_insert(self):
 
-		if self.validar_vacio() and self.validar_numero() and self.validar_letra() and self.validar_nivel_n() and self.validar_municipio_n() and self.validar_tlf_r() and self.validar_serial_c() and self.validar_fec_re_re() and self.validar_fec_en_re():
+		if self.validar_vacio() and self.validar_numero() and self.validar_letra() and self.validar_nivel_n() and self.validar_municipio_n() and self.validar_tlf_r() and self.validar_serial_modelo() and self.validar_fec_re_re() and self.validar_fec_en_re():
 			self.insertar()
 			return True
 		else:
