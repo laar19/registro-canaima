@@ -1,0 +1,41 @@
+sistema-canaima
+
+	Luis Acevedo <laar@openmailbox.org>
+
+		sistema para el registro y control de los equipos canaima (tabletas y canaimitas) entregados a los/as estudiantes.
+
+		consta de tres módulos:
+
+			*inserción.
+			*búsqueda, listado y modificación.
+			*reportes.
+
+		información técnica:
+
+			desarrollado en python 2.7.
+			Tkinter como librería gráfica.
+			postgresql como manejador de base de datos.
+
+		requerimientos para linux:
+
+			python-tk
+			postgresql
+			python-psycopg2
+
+		---------------------------------------------
+		contenido
+
+			README                  este archivo
+
+			main.py                 ejecuta la aplicación
+
+			sc_conexiondb.py        conexión con la base de datos
+
+			sc_reportes.py          reportes generados
+
+			sc_formulario.py        formulario principal
+
+		---------------------------------------------
+		para lanzar la aplicación ejecutar main.py
+
+
