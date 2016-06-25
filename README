@@ -2,7 +2,7 @@ registro-canaima
 
 	Luis Acevedo <laar@openmailbox.org>
 
-		sistema para el registro y control de los equipos canaima (tabletas y canaimitas) entregados a los/as estudiantes.
+		aplicación para el registro y control de los equipos canaima (tabletas y canaimitas) entregados a los/as estudiantes.
 
 		consta de tres módulos:
 
@@ -30,11 +30,15 @@ registro-canaima
 
 			main.py                 ejecuta la aplicación
 
-			sc_conexiondb.py        conexión con la base de datos
+			rc_conexiondb.py        conexión con la base de datos
 
-			sc_reportes.py          reportes generados
+			rc_reportes.py          reportes generados
 
-			sc_formulario.py        formulario principal
+			rc_formulario.py        formulario principal
+
+			db_canaima.sql			sentencias sql para construir la base de datos
+
+			COPYING					licencia GPLv3
 
 		---------------------------------------------
 		para lanzar la aplicación ejecutar main.py
