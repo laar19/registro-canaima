@@ -1,6 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2016 Luis Acevedo
+#
+# This file is part of registro-canaima.
+#
+# registro-canaima is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# registro-canaima is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import getpass
 
 #librería de conexión con la base de datos
@@ -46,6 +63,7 @@ def createdb():
 ################################################## end crear base de datos #######################################################
 
 ################################################## begin main ####################################################################
+print "registro-canaima Copyright (C) 2016 Luis Acevedo\nregistro-canaima comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions; type `show c' for details.\n"
 usuario = getpass.getpass("Nombre usuario postgresql: ")
 password = getpass.getpass("Contraseña postgresql: ")
 

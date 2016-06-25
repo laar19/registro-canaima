@@ -1,4 +1,4 @@
-sistema-canaima
+registro-canaima
 
 	Luis Acevedo <laar@openmailbox.org>
 
@@ -15,6 +15,7 @@ sistema-canaima
 			desarrollado en python 2.7.
 			Tkinter como librería gráfica.
 			postgresql como manejador de base de datos.
+			distribuído bajo la GNU General Public License (GPLv3)
 
 		requerimientos para linux:
 

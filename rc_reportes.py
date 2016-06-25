@@ -1,13 +1,30 @@
 #!/usr/bin/env python
 #! -*- coding: utf-8 -*-
 
+# Copyright (C) 2016 Luis Acevedo
+#
+# This file is part of registro-canaima.
+#
+# registro-canaima is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# registro-canaima is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #librería visuales
 from Tkinter import*
 import tkMessageBox
 import ttk
 
 #conexión con la base de datos
-from conexiondb.sc_conexiondb import conexion_open, conexion2
+from conexiondb.rc_conexiondb import conexion_open, conexion2
 
 global con, cur
 try:
@@ -24,7 +41,7 @@ class Appselect:
 		self.root = Tk()
 		#self.root.config(bg = "grey")
 		#self.root.geometry("830x430")
-		self.root.title("sistema-canaima-reportes")
+		self.root.title("registro-canaima-reportes")
 		
 		################################################## self.labelframe_select0 ##################################################
 		#global self.labelframe_select0
@@ -622,7 +639,7 @@ class Appselect:
 			else:
 				tkMessageBox.showinfo("postgresql", "La institución no se encuentra registrada.")
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "Debe buscar una instancia a la vez:\nPor municipio o centro de actualización.\nO por institución.")
+			tkMessageBox.showinfo("registro-canaima", "Debe buscar una instancia a la vez:\nPor municipio o centro de actualización.\nO por institución.")
 
 		################################################## fin total de equipos por institucion #############################################
 
@@ -644,7 +661,7 @@ class Appselect:
 	root = Tk()
 	#root.config(bg = "grey")
 	#root.geometry("830x430")
-	root.title("sistema-canaima-reportes")
+	root.title("registro-canaima-reportes")
 
 	app = Appselect(root)
 	app.run()

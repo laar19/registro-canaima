@@ -1,6 +1,23 @@
 #!/usr/bin/env python
 #! -*- coding: utf-8 -*-
 
+# Copyright (C) 2016 Luis Acevedo
+#
+# This file is part of registro-canaima.
+#
+# registro-canaima is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# registro-canaima is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import sys
 
 #librerías visuales
@@ -9,11 +26,11 @@ import tkMessageBox
 import ttk
 
 #conexión con la base de datos
-from conexiondb.sc_conexiondb import conexion_open, conexion2
-from conexiondb.sc_conexiondb import*
+from conexiondb.rc_conexiondb import conexion_open, conexion2
+from conexiondb.rc_conexiondb import*
 
 #reportes
-from sc_reportes import Appselect
+from rc_reportes import Appselect
 
 global con, cur, app
 try:
@@ -32,7 +49,7 @@ class Formulario:
 		self.root = Tk()
 		#self.root.config(bg = "grey")
 		self.root.geometry("740x320")
-		self.root.title("sistema-canaima")
+		self.root.title("registro-canaima")
 
 		#menú
 		self.menubar = Menu(self.root, bg = "grey")
@@ -502,7 +519,7 @@ class Formulario:
 		#si la búsqueda se hizo por la cédula o el nombre del alumno
 		if len(str(ci_n)) > 0 or len(str(nombre_n)) > 0 and len(str(ci_r)) == 0 and len(str(nombre_r)) == 0 and len(str(serial_c)) == 0:
 			if len(nombre_n) == 0 or nombre_n.isspace() == True or len(plantel_n) == 0 or plantel_n.isspace() == True or len(nivel_n) == 0 or nivel_n.isspace() == True or len(nombre_r) == 0 or nombre_r.isspace() == True:
-				tkMessageBox.showinfo("sistema-canaima", "Los campos marcados ""*"" son obligatorios")
+				tkMessageBox.showinfo("registro-canaima", "Los campos marcados ""*"" son obligatorios")
 			elif self.validar_nivel_n() and self.validar_municipio_n() and self.validar_tlf_r():
 				con, cur = conexion_open(conexion2)
 				cur.execute("UPDATE tab_representante_r SET nombre_r = (%s), tlf_r = (%s) WHERE ci_r = (%s)", (nombre_r, tlf_r, ci_r,))
@@ -512,7 +529,7 @@ class Formulario:
 				row_id_re = cur.fetchall()
 				if len(row_id_re) > 0:
 					if len(modelo_c) == 0 or modelo_c.isspace() == True or len(institucion_c) == 0 or institucion_c.isspace() == True or len(falla_re) == 0 or falla_re.isspace() == True or len(centro_re) == 0 or centro_re.isspace() == True:
-						tkMessageBox.showinfo("sistema-canaima", "Los campos marcados ""*"" son obligatorios")
+						tkMessageBox.showinfo("registro-canaima", "Los campos marcados ""*"" son obligatorios")
 						return False
 					elif self.validar_nivel_n() and self.validar_municipio_n() and self.validar_tlf_r() and self.validar_fec_re_re() and self.validar_fec_en_re():
 						row_id_re2 = row_id_re[0][0] #id de la tabla reparación
@@ -536,7 +553,7 @@ class Formulario:
 		#si se busca la cédula o el nombre del representante
 		elif len(str(ci_n)) == 0 and len(str(nombre_n)) == 0 and len(str(ci_r)) > 0 and len(str(nombre_r)) > 0 and len(str(serial_c)) == 0:
 			if len(nombre_r) == 0 or nombre_r.isspace() == True:
-				tkMessageBox.showinfo("sistema-canaima", "Los campos marcados ""*"" son obligatorios")
+				tkMessageBox.showinfo("registro-canaima", "Los campos marcados ""*"" son obligatorios")
 				return False
 
 			elif self.validar_tlf_r():
@@ -550,10 +567,10 @@ class Formulario:
 				return True
 		else:
 			if len(nombre_r) == 0 or nombre_r.isspace() == True:
-				tkMessageBox.showinfo("sistema-canaima", "Los campos marcados ""*"" son obligatorios")
+				tkMessageBox.showinfo("registro-canaima", "Los campos marcados ""*"" son obligatorios")
 				return False
 			else:
-				tkMessageBox.showinfo("sistema-canaima", "Debe buscar una instancia a la vez")
+				tkMessageBox.showinfo("registro-canaima", "Debe buscar una instancia a la vez")
 				self.limpiar()
 	################################################## fin modificar ##################################################
 
@@ -637,7 +654,7 @@ class Formulario:
 				cur.execute("SELECT ci_n FROM tab_nino_n WHERE ci_n = (%s)", (ci_n,))
 				row_ci_n = cur.fetchall()
 			except (DataError, UnicodeEncodeError) as e:
-				tkMessageBox.showinfo("sistema-canaima", "Ingrese correctamente el número de cédula")
+				tkMessageBox.showinfo("registro-canaima", "Ingrese correctamente el número de cédula")
 			finally:
 				cur.close()
 				con.close()
@@ -774,7 +791,7 @@ class Formulario:
 				cur.execute("SELECT ci_r FROM tab_representante_r WHERE ci_r = (%s)", (ci_r,))
 				row_ci_r = cur.fetchall()
 			except (DataError, UnicodeEncodeError) as e:
-				tkMessageBox.showinfo("sistema-canaima", "Ingrese correctamente el número de cédula")
+				tkMessageBox.showinfo("registro-canaima", "Ingrese correctamente el número de cédula")
 			finally:
 				cur.close()
 				con.close()
@@ -1006,7 +1023,7 @@ class Formulario:
 
 		#si se buscan varios argumentos a la vez
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "Debe buscar una instancia a la vez")
+			tkMessageBox.showinfo("registro-canaima", "Debe buscar una instancia a la vez")
 			self.limpiar()
 	################################################## fin buscar datos ##################################################
 
@@ -1029,7 +1046,7 @@ class Formulario:
 		self.capturar()
 
 		if ci_n.isdigit() != True or ci_r.isdigit() != True:
-			tkMessageBox.showinfo("sistema-canaima", "Debe ingresar sólo números:\n*Cédula del alumno\n*Cédula del representante")
+			tkMessageBox.showinfo("registro-canaima", "Debe ingresar sólo números:\n*Cédula del alumno\n*Cédula del representante")
 			return False
 		else:
 			return True
@@ -1044,7 +1061,7 @@ class Formulario:
 		nombre_n_letra = nombre_n_letra.replace(' ', '')
 		nombre_r_letra = nombre_r_letra.replace(' ', '')
 		if nombre_n_letra.isalpha() != True or nombre_r_letra.isalpha() != True:
-			tkMessageBox.showinfo("sistema-canaima", "Debe ingresar sólo letras:\n*Nombre del alumno\n*Nombre del representante")
+			tkMessageBox.showinfo("registro-canaima", "Debe ingresar sólo letras:\n*Nombre del alumno\n*Nombre del representante")
 			return False
 		else:
 			return True
@@ -1057,7 +1074,7 @@ class Formulario:
 		lista_niveles = ["1ERGRADO", "2DOGRADO", "3ERGRADO", "4TOGRADO", "5TOGRADO", "6TOGRADO", "1ERANO", "2DOANO", "3ERANO", "4TOANO", "5TOANO", "6TOANO"]
 
 		if nivel_n not in lista_niveles:
-			tkMessageBox.showinfo("sistema-canaima", "Ingrese correctamente el nivel académico del alumno")
+			tkMessageBox.showinfo("registro-canaima", "Ingrese correctamente el nivel académico del alumno")
 			return False
 		else:
 			return True
@@ -1070,7 +1087,7 @@ class Formulario:
 		lista_municipios = ["ARISMENDI", "DIAZ", "MARCANO", "TUBORES", "PENINSULA DE MACANAO", "GARCIA", "MARINO", "MANEIRO", "ANTOLIN DEL CAMPO", "VILLALBA", "GOMEZ"]
 
 		if municipio_n not in lista_municipios:
-			tkMessageBox.showinfo("sistema-canaima", "El municipio no existe")
+			tkMessageBox.showinfo("registro-canaima", "El municipio no existe")
 			return False
 		else:
 			return True
@@ -1083,7 +1100,7 @@ class Formulario:
 		if (len(tlf_r) == 11 and tlf_r.isdigit() == True) or tlf_r == "SIN TELEFONO":
 			return True
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "El número de teléfono debe contener 11 caracteres numéricos.\nO en su defecto: SIN TELEFONO")
+			tkMessageBox.showinfo("registro-canaima", "El número de teléfono debe contener 11 caracteres numéricos.\nO en su defecto: SIN TELEFONO")
 			return False
 
 	#validar_serial_modelo
@@ -1094,7 +1111,7 @@ class Formulario:
 		if serial_c.isalnum() == True and len(serial_c) <= 25 and len(modelo_c) <= 20:
 			return True
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "El serial y el modelo del equipo debe contener no más de 25 caracteres alfanuméricos")
+			tkMessageBox.showinfo("registro-canaima", "El serial y el modelo del equipo debe contener no más de 25 caracteres alfanuméricos")
 			return False
 
 	#validar_fec_re_re. Formato de fecha: 2006-06-06, año-mes-día
@@ -1108,7 +1125,7 @@ class Formulario:
 		if len(fec_re_re) == 10 and fec_re_re[0:4].isdigit() == True and fec_re_re[4] == "-" and fec_re_re[5:7] in lista_meses != True and fec_re_re[7] == "-" and fec_re_re[8:10] in lista_dias != True:
 			return True
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "La fecha debe contener el siguiente formato aaaa-mm-dd")
+			tkMessageBox.showinfo("registro-canaima", "La fecha debe contener el siguiente formato aaaa-mm-dd")
 			return False
 
 	#validar_fec_en_re. Formato de fecha: 2006-06-06, año-mes-día
@@ -1124,7 +1141,7 @@ class Formulario:
 		elif len(fec_en_re) == 0:
 				return True
 		else:
-			tkMessageBox.showinfo("sistema-canaima", "La fecha debe contener el siguiente formato aaaa-mm-dd")
+			tkMessageBox.showinfo("registro-canaima", "La fecha debe contener el siguiente formato aaaa-mm-dd")
 			return False
 
 	#funcion que agrupa las validaciones
@@ -1148,7 +1165,7 @@ app[0].root.mainloop()
 	root = Tk()
 	#root.config(bg = "grey")
 	root.geometry("740x320")
-	root.title("sistema-canaima")
+	root.title("registro-canaima")
 
 	app = Formulario(root)
 	root.mainloop()"""
