@@ -349,7 +349,7 @@ class Appselect:
 				self.cambio_re_entry6.config(state = DISABLED)
 
 				#se muestran todos los equipos recibidos por municipios o centros sin institución ni fecha
-				lista_municipios = ["ARISMfinI", "DIAZ", "MARCANO", "TUBORES", "PENINSULA DE MACANAO", "GARCIA", "MARINO", "MANEIRO", "ANTOLIN DEL CAMPO", "VILLALBA", "GOMEZ"]
+				lista_municipios = ["ARISMENDI", "DIAZ", "MARCANO", "TUBORES", "PENINSULA DE MACANAO", "GARCIA", "MARINO", "MANEIRO", "ANTOLIN DEL CAMPO", "VILLALBA", "GOMEZ"]
 				con, cur = conexion_open(conexion2)
 				cur.execute("SELECT c.serial_c FROM (tab_canaima_c AS a INNER JOIN tab_nino_n AS b ON a.ci_n = b.ci_n) INNER JOIN tab_reparacion_re AS c ON a.serial_c = c.serial_c WHERE (municipio_n = (%s) OR centro_re = (%s))", (municipio_centro, municipio_centro,))
 				row_lista_reparaciones = cur.fetchall()
