@@ -1,5 +1,7 @@
 # Registro Canaima
 
+<img src="https://img.shields.io/badge/GPL-v3-green"/>
+
 Aplicación para el registro y control de los equipos canaima (tabletas y canaimitas) entregados a los/as estudiantes.
 
 
@@ -8,7 +10,6 @@ Aplicación para el registro y control de los equipos canaima (tabletas y canaim
 - Desarrollado en python 2.7.
 - Tkinter como librería gráfica.
 - Postgresql.
-- Distribuído bajo la GNU General Public License (GPLv3).
 
 ## Requerimientos para Debian, Ubuntu y derivados
 - python-tk
